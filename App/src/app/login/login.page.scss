@@ -1,0 +1,16 @@
+.text {
+    &--small {
+        font-size: 0.75rem;
+    }
+
+    &--center {
+        text-align: center;
+    }
+}
+
+.row--input-icon {
+    width: 100%;
+    col {
+        padding: 0;
+    }
+}

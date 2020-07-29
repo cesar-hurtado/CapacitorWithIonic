@@ -1,0 +1,50 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-title><img src="./assets/images/logo.png" style="display:inline-block" height="40px"/></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light" scrollY="false">
+    <ion-grid>
+      <form [formGroup]="form" (ngSubmit)="login()">
+      <ion-row>
+        <ion-col>
+          <ion-list>
+            <ion-item>
+              <ion-label position="stacked">Email</ion-label>
+              <ion-input formControlName="email"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="!form.get('email').valid && form.get('email').dirty">
+              <ion-text class="text--small" color="danger">
+                <p>Email is required</p>
+              </ion-text>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Password</ion-label>
+              <ion-row class="row--input-icon">
+                <ion-col>
+                  <ion-input [type]="passwordType" formControlName="password"></ion-input>
+                </ion-col>
+                <ion-col size="2">
+                  <ion-button color="light" (click)="hideShowPassword()"><ion-icon item-right [name]="passwordIcon"></ion-icon></ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-item>
+            <ion-item *ngIf="!form.get('password').valid && form.get('password').dirty">
+              <ion-text class="text--small" color="danger">
+                <p>Password is wrong</p>
+              </ion-text>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="text--center">
+        <ion-col>
+          <ion-button color="success" expand="block" type="submit" [disabled]="!form.valid">Login</ion-button>
+          <a class="text--small" href="#">Forgot password?</a>
+        </ion-col>
+      </ion-row>
+    </form>
+    </ion-grid>
+</ion-content>
