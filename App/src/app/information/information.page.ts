@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MenuController, NavController, IonRouterOutlet } from '@ionic/angular';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
+declare var Capacitor;
+const { CountdownPlugin } = Capacitor.Plugins;
+
 @Component({
   selector: 'app-information',
   templateUrl: './information.page.html',
@@ -42,6 +45,10 @@ export class InformationPage implements OnInit {
      }).catch((error) => {
        console.log('Error getting location', error);
      });
+  }
+
+  async openCountdown() {
+    await CountdownPlugin.initCountdown();
   }
 
 }

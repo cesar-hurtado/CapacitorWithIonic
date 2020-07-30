@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoadingController, NavController } from '@ionic/angular';
+import { TimerPlugin } from 'src/providers/timer.capacitor.plugin';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,8 @@ export class LoginPage implements OnInit {
   }
 
   async login() {
+    const plugin = new TimerPlugin();
+    plugin.echo('Hola');
     await this.presentLoading();
     this.navCtrl.navigateForward('/information');
   }
