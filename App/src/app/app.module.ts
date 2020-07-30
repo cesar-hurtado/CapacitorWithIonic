@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { LoginPage } from './login/login.page';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InformationPage } from './information/information.page';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @NgModule({
   declarations: [AppComponent, LoginPage, InformationPage],
@@ -19,7 +20,8 @@ import { InformationPage } from './information/information.page';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Geolocation,
   ],
   bootstrap: [AppComponent]
 })
