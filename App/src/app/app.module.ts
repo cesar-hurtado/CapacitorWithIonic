@@ -12,11 +12,14 @@ import { LoginPage } from './login/login.page';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InformationPage } from './information/information.page';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { PickupsListPage } from './pickups-list/pickups-list.page';
 
 @NgModule({
-  declarations: [AppComponent, LoginPage, InformationPage],
+  declarations: [AppComponent, LoginPage, InformationPage, PickupsListPage],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ReactiveFormsModule],
+  imports: [BrowserModule, IonicModule.forRoot(
+    {mode:'ios'}
+  ), AppRoutingModule, ReactiveFormsModule],
   providers: [
     StatusBar,
     SplashScreen,

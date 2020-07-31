@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { LoadingController, NavController } from '@ionic/angular';
+import { LoadingController, NavController, Platform } from '@ionic/angular';
 import { TimerPlugin } from 'src/providers/timer.capacitor.plugin';
 
 @Component({
@@ -13,15 +13,17 @@ export class LoginPage implements OnInit {
   passwordType = 'password';
   passwordIcon = 'eye-off';
 
-  constructor(private loadingController: LoadingController, private navCtrl: NavController) { }
+  constructor(private loadingController: LoadingController, private navCtrl: NavController, private platform: Platform) { }
 
   ngOnInit() {
     this.createForm();
   }
 
   async login() {
-    const plugin = new TimerPlugin();
-    plugin.echo('Hola');
+    if (this.platform.is('ios')) {
+      const plugin = new TimerPlugin();
+      plugin.echo('Hola');
+    }
     await this.presentLoading();
     this.navCtrl.navigateForward('/information');
   }
@@ -33,8 +35,8 @@ export class LoginPage implements OnInit {
 
   private createForm() {
     this.form = new FormGroup({
-      email: new FormControl(null, Validators.required),
-      password: new FormControl(null, Validators.required),
+      email: new FormControl(null, [Validators.required, Validators.minLength(4)]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(4)]),
     })
   }
 

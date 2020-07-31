@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController, NavController, IonRouterOutlet } from '@ionic/angular';
+import { MenuController, NavController, IonRouterOutlet, Platform } from '@ionic/angular';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 declare var Capacitor;
@@ -14,19 +14,17 @@ export class InformationPage implements OnInit {
   latitude: number;
   longitude: number;
 
-  constructor(private menu: MenuController, private navCtrl: NavController, private routerOutlet: IonRouterOutlet, private geolocation: Geolocation) { }
+  constructor(private menu: MenuController, private navCtrl: NavController, private routerOutlet: IonRouterOutlet, private geolocation: Geolocation, private platform: Platform) { }
 
   ngOnInit() {
   }
 
   ionViewWillEnter() {
-    this.routerOutlet.swipeGesture = false;
-    this.menu.enable(true, 'custom');
+    this.enableSwipeGesture(false);
   }
 
   ionViewWillLeave() {
-    this.routerOutlet.swipeGesture = true;
-    this.menu.enable(false, 'custom');
+    this.enableSwipeGesture(true);
   }
 
   openMenu() {
@@ -48,7 +46,18 @@ export class InformationPage implements OnInit {
   }
 
   async openCountdown() {
-    await CountdownPlugin.initCountdown();
+    if (this.platform.is('ios')) {
+      await CountdownPlugin.initCountdown({ initNumber: 10 });
+    }
+  }
+
+  async goToPickupsList() {
+    this.navCtrl.navigateForward('pickups-list');
+  } 
+
+  private async enableSwipeGesture(enable: boolean) {
+    this.routerOutlet.swipeGesture = enable;
+    this.menu.enable(!enable, 'custom');
   }
 
 }

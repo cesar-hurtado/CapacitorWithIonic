@@ -8,7 +8,13 @@
 import UIKit
 
 class CountdownViewController: UIViewController {
-    let viewName = "CountdownViewController"
+    
+    public var initNumber = 1
+    
+    private var timer = Timer()
+    private let viewName = "CountdownViewController"
+    
+    @IBOutlet weak var initNumberLabel: UILabel!
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: viewName, bundle: nil)
@@ -21,9 +27,31 @@ class CountdownViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateView(number: String(initNumber))
+        initCountdown()
     }
 
     @IBAction func dismiss(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    private func initCountdown() {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateCounter), userInfo: nil, repeats: true)
+    }
+    
+    @objc private func updateCounter() {
+        if initNumber > 0 {
+            initNumber -= 1
+            updateView(number: String(self.initNumber))
+        } else {
+            timer.invalidate()
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    private func updateView(number: String) {
+        DispatchQueue.main.async {
+            self.initNumberLabel.text = String(number)
+        }
     }
 }
