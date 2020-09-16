@@ -8,14 +8,16 @@ pipeline {
     stages {
 
         stage("Prepare") {
-            sh 'npm install'
+            steps {
+                sh 'npm install'
+            }
         }
 
         stage('IOS Build') {
-          steps {
-            sh 'ionic cap copy ios'
-            sh 'npx cap update ios'
-          }
+            steps {
+                sh 'ionic cap copy ios'
+                sh 'npx cap update ios'
+            }
        }
     }
     
