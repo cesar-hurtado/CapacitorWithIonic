@@ -34,7 +34,19 @@ pipeline {
                     }
                 }
             }
-       }
+        }
+
+        stage('Build IPA') {
+            steps {
+                dir('App') {
+                    dir('ios') {
+                        sh 'xcodebuild -exportArchive -archivePath App.xcarchive \
+                            -exportOptionsPlist ExportOptions.plist \
+                            -exportPath  Build'
+                    }
+                }
+            }
+        }
     }
     
 }
