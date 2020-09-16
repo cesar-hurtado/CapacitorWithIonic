@@ -8,18 +8,16 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginPage } from './login/login.page';
-import { ReactiveFormsModule } from '@angular/forms';
-import { InformationPage } from './information/information.page';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { PickupsListPage } from './pickups-list/pickups-list.page';
+import { PresentationModule } from './presentation/presentation.module';
+import { LoginRepository } from './core/repositories/login.repository';
+import { FakeLoginRepository } from './data/repositories/fake.login.repository';
+import { ConfigModule } from './config.module';
 
 @NgModule({
-  declarations: [AppComponent, LoginPage, InformationPage, PickupsListPage],
+  declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(
-    {mode:'ios'}
-  ), AppRoutingModule, ReactiveFormsModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, PresentationModule, ConfigModule],
   providers: [
     StatusBar,
     SplashScreen,

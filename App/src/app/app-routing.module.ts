@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { LoginPage } from './login/login.page';
-import { InformationPage } from './information/information.page';
-import { PickupsListPage } from './pickups-list/pickups-list.page';
+import { LoginPage } from './presentation/login/login.page';
+import { InformationPage } from './presentation/information/information.page';
+import { PickupsListPage } from './presentation/pickups-list/pickups-list.page';
+
 
 const routes: Routes = [
   {
