@@ -16,6 +16,7 @@ pipeline {
 
         stage('IOS Build') {
             steps {
+                sh 'cd App'
                 sh 'ionic cap copy ios'
                 sh 'npx cap update ios'
             }
