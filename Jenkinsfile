@@ -42,7 +42,18 @@ pipeline {
                     dir('ios') {
                         sh 'xcodebuild -exportArchive -archivePath App.xcarchive \
                             -exportOptionsPlist ExportOptions.plist \
-                            -exportPath  Build'
+                            -exportPath Build'
+                    }
+                }
+            }
+        }
+
+        stage('Upload IPA to Appcenter') {
+            steps {
+                dir('App') {
+                    dir('ios') {
+                        sh 'appcenter login --token a630f052ac1f981500bdeb63f568dd4ab22b7432'
+                        sh 'appcenter distribute release -f Build/App.ipa -g Collaborators --app cesar.hurtado/Sharetown-iOS-Jenkins'
                     }
                 }
             }
