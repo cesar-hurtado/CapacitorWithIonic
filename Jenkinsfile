@@ -9,6 +9,7 @@ pipeline {
 
         stage("Prepare") {
             steps {
+                sh 'cd App'
                 sh 'npm install'
             }
         }
