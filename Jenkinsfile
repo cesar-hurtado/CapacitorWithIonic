@@ -29,7 +29,7 @@ pipeline {
                 dir('App') {
                     dir('ios') {
                         sh 'xcodebuild -workspace App/App.xcworkspace \
-                            -scheme App clean archive -configuration release \
+                            -scheme App clean archive -configuration debug \
                             -sdk iphoneos -archivePath App.xcarchive'
                     }
                 }
