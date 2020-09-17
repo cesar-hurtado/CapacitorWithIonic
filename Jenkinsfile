@@ -15,7 +15,7 @@ pipeline {
 
     stages {
 
-        stage("Prepare") {
+        stage('Prepare') {
             steps {
                 dir('App') {
                     sh "npm install"
@@ -23,12 +23,11 @@ pipeline {
             }
         }
 
-        stage("Build iOS") {
+        stage('Build iOS') {
             steps {
                 dir('App') {
                     sh 'ionic cap copy ios --configuration production'
                     sh 'npx cap update ios'
-                    sh 'rm -rf node_modules'
                 }
             }
         }
@@ -38,7 +37,7 @@ pipeline {
                 dir('App') {
                     dir('ios') {
                         sh 'xcodebuild -workspace App/App.xcworkspace \
-                            -scheme App clean archive -configuration debug \
+                            -scheme App clean archive -configuration Debug \
                             -sdk iphoneos -archivePath App.xcarchive'
                     }
                 }
@@ -63,6 +62,14 @@ pipeline {
                     dir('ios') {
                         sh 'appcenter distribute release -f Build/debug/App.ipa -g Collaborators --app cesar.hurtado/Sharetown-iOS-Jenkins'
                     }
+                }
+            }
+        }
+
+        stage('Clean') {
+            steps {
+                dir('App') {
+                    sh 'rm -rf node_modules'
                 }
             }
         }
