@@ -49,7 +49,7 @@ pipeline {
                 dir('App') {
                     dir('ios') {
                         sh 'xcodebuild -exportArchive -archivePath App.xcarchive \
-                            -exportOptionsPlist ExportOptions.plist \
+                            -exportOptionsPlist ../exportOptions.plist \
                             -exportPath Build/debug'
                     }
                 }
