@@ -1,10 +1,9 @@
-def
-ENVIRONMENT = 'production'
-BUILD_CONFIGURATION = 'debug'
-DISTRIBUTION_GROUP = 'Collaborators'
-DISTRIBUTION_APP = 'cesar.hurtado/Sharetown-iOS-Jenkins'
+def ENVIRONMENT = 'production'
+def BUILD_CONFIGURATION = 'debug'
+def DISTRIBUTION_GROUP = 'Collaborators'
+def DISTRIBUTION_APP = 'cesar.hurtado/Sharetown-iOS-Jenkins'
 //APPCENTER_TOKEN = '3102a4b199239a453019e3a07ee3d9f60c4416bb'
-APPCENTER_TOKEN = '86d891238a9c8603b53a1322e22a7cca89f8db41'
+def APPCENTER_TOKEN = '86d891238a9c8603b53a1322e22a7cca89f8db41'
 
 pipeline {
     agent any
