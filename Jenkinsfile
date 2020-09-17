@@ -3,13 +3,15 @@ ENVIRONMENT = 'production'
 BUILD_CONFIGURATION = 'debug'
 DISTRIBUTION_GROUP = 'Collaborators'
 DISTRIBUTION_APP = 'cesar.hurtado/Sharetown-iOS-Jenkins'
-APPCENTER_TOKEN = 'a630f052ac1f981500bdeb63f568dd4ab22b7432'
+//APPCENTER_TOKEN = '3102a4b199239a453019e3a07ee3d9f60c4416bb'
+APPCENTER_TOKEN = '86d891238a9c8603b53a1322e22a7cca89f8db41'
 
 pipeline {
     agent any
 
     environment {
         PATH='/usr/local/bin:/usr/bin:/bin'
+        APPCENTER_ACCESS_TOKEN='${APPCENTER_TOKEN}'
 	}
 
     stages {
@@ -60,7 +62,6 @@ pipeline {
             steps {
                 dir('App') {
                     dir('ios') {
-                        sh 'appcenter login --token ${APPCENTER_TOKEN}'
                         sh 'appcenter distribute release -f Build/${BUILD_CONFIGURATION}/App.ipa -g ${DISTRIBUTION_GROUP} --app ${DISTRIBUTION_APP}'
                     }
                 }
