@@ -32,6 +32,14 @@ pipeline {
             }
         }
 
+        stage('Clean') {
+            steps {
+                dir('App') {
+                    sh 'rm -rf node_modules'
+                }
+            }
+        }
+
         stage('Build archive') {
             steps {
                 dir('App') {
@@ -62,14 +70,6 @@ pipeline {
                     dir('ios') {
                         sh 'appcenter distribute release -f Build/debug/App.ipa -g Collaborators --app cesar.hurtado/Sharetown-iOS-Jenkins'
                     }
-                }
-            }
-        }
-
-        stage('Clean') {
-            steps {
-                dir('App') {
-                    sh 'rm -rf node_modules'
                 }
             }
         }
