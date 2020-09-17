@@ -7,9 +7,9 @@ APPCENTER_TOKEN = 'a630f052ac1f981500bdeb63f568dd4ab22b7432'
 pipeline {
     agent any
 
-    // environment {
-    //     PATH='/usr/local/bin:/usr/bin:/bin'
-	// }
+    environment {
+        PATH='/usr/local/bin:/usr/bin:/bin'
+	}
 
     stages {
 
