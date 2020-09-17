@@ -1,4 +1,5 @@
-ENVIRONMENT = 'qa'
+def
+ENVIRONMENT = 'production'
 BUILD_CONFIGURATION = 'debug'
 DISTRIBUTION_GROUP = 'Collaborators'
 DISTRIBUTION_APP = 'cesar.hurtado/Sharetown-iOS-Jenkins'
