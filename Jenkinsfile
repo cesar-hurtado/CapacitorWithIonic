@@ -1,16 +1,21 @@
-def ENVIRONMENT = 'production'
-def BUILD_CONFIGURATION = 'debug'
-def DISTRIBUTION_GROUP = 'Collaborators'
-def DISTRIBUTION_APP = 'cesar.hurtado/Sharetown-iOS-Jenkins'
-//APPCENTER_TOKEN = '3102a4b199239a453019e3a07ee3d9f60c4416bb'
-def APPCENTER_TOKEN = '86d891238a9c8603b53a1322e22a7cca89f8db41'
+//def ENVIRONMENT = 'production'
+//def BUILD_CONFIGURATION = 'debug'
+//def DISTRIBUTION_GROUP = 'Collaborators'
+//def DISTRIBUTION_APP = 'cesar.hurtado/Sharetown-iOS-Jenkins'
+//Sharetown APPCENTER_TOKEN = '3102a4b199239a453019e3a07ee3d9f60c4416bb'
+//APPCENTER_TOKEN = '86d891238a9c8603b53a1322e22a7cca89f8db41'
 
 pipeline {
     agent any
 
+    def ENVIRONMENT = 'production'
+    def BUILD_CONFIGURATION = 'debug'
+    def DISTRIBUTION_GROUP = 'Collaborators'
+    def DISTRIBUTION_APP = 'cesar.hurtado/Sharetown-iOS-Jenkins'
+
     environment {
         PATH='/usr/local/bin:/usr/bin:/bin'
-        APPCENTER_ACCESS_TOKEN='${APPCENTER_TOKEN}'
+        APPCENTER_ACCESS_TOKEN='86d891238a9c8603b53a1322e22a7cca89f8db41'
 	}
 
     stages {
