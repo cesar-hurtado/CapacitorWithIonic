@@ -1,9 +1,15 @@
+ENVIRONMENT = 'qa'
+BUILD_CONFIGURATION = 'debug'
+DISTRIBUTION_GROUP = 'Collaborators'
+DISTRIBUTION_APP = 'cesar.hurtado/Sharetown-iOS-Jenkins'
+APPCENTER_TOKEN = 'a630f052ac1f981500bdeb63f568dd4ab22b7432'
+
 pipeline {
     agent any
 
-    environment {
-        PATH='/usr/local/bin:/usr/bin:/bin'
-	}
+    // environment {
+    //     PATH='/usr/local/bin:/usr/bin:/bin'
+	// }
 
     stages {
 
@@ -18,8 +24,9 @@ pipeline {
         stage("Build iOS") {
             steps {
                 dir('App') {
-                    sh 'ionic cap copy ios'
+                    sh 'ionic cap copy ios --configuration ${ENVIRONMENT}'
                     sh 'npx cap update ios'
+                    sh 'rm -rf node_modules'
                 }
             }
         }
@@ -29,7 +36,7 @@ pipeline {
                 dir('App') {
                     dir('ios') {
                         sh 'xcodebuild -workspace App/App.xcworkspace \
-                            -scheme App clean archive -configuration debug \
+                            -scheme App clean archive -configuration ${BUILD_CONFIGURATION} \
                             -sdk iphoneos -archivePath App.xcarchive'
                     }
                 }
@@ -42,7 +49,7 @@ pipeline {
                     dir('ios') {
                         sh 'xcodebuild -exportArchive -archivePath App.xcarchive \
                             -exportOptionsPlist ExportOptions.plist \
-                            -exportPath Build'
+                            -exportPath Build/${BUILD_CONFIGURATION}'
                     }
                 }
             }
@@ -52,8 +59,8 @@ pipeline {
             steps {
                 dir('App') {
                     dir('ios') {
-                        sh 'appcenter login --token a630f052ac1f981500bdeb63f568dd4ab22b7432'
-                        sh 'appcenter distribute release -f Build/App.ipa -g Collaborators --app cesar.hurtado/Sharetown-iOS-Jenkins'
+                        sh 'appcenter login --token ${APPCENTER_TOKEN}'
+                        sh 'appcenter distribute release -f Build/${BUILD_CONFIGURATION}/App.ipa -g ${DISTRIBUTION_GROUP} --app ${DISTRIBUTION_APP}'
                     }
                 }
             }
