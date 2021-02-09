@@ -6,5 +6,6 @@ sudo npm install yarn -g
 sudo npm install -g ionic
 cd ../../
 npm i
-ionic build
-npx cap sync
+ionic build --configuration qa
+npx cap copy ios
+npx cap update ios
